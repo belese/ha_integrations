@@ -1,0 +1,18 @@
+{
+    "domain": "autodarts",
+    "name": "autodarts",
+    "codeowners": [
+        "@belese"
+    ],
+    "version": "1.0.0",
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/belese/ha_integrations",
+    "homekit": {},
+    "iot_class": "cloud_push",
+    "requirements": [
+        "git+https://github.com/belese/python-autodarts#autodarts==0.0.7"
+    ],
+    "ssdp": [],
+    "zeroconf": []
+}
