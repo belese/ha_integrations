@@ -32,7 +32,7 @@ class AutoDartEntity(CoordinatorEntity):
 
 
 
-class AutoDartChildEntity(CoordinatorEntity):
+class AutoDartChildEntity(AutoDartEntity):
     """An entity using CoordinatorEntity.
     """
 
