@@ -8,6 +8,8 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
 
 class AutoDartEntity(CoordinatorEntity):
+     __name__ = ""
+    
     def __init__(self, coordinator, idx=None):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator, context=idx)
@@ -29,10 +31,8 @@ class AutoDartEntity(CoordinatorEntity):
 
 
 class AutoDartChildEntity(AutoDartEntity):
-    """An entity using CoordinatorEntity.
+    """An board child entity using CoordinatorEntity.
     """
-
-    __name__ = ""
 
     def __init__(self, coordinator, idx=None):
         """Pass coordinator to CoordinatorEntity."""
