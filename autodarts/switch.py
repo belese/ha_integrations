@@ -14,6 +14,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import ( 
     DOMAIN
@@ -65,8 +66,22 @@ class CloudConnectionBinarySensor(AutoDartChildEntity, SwitchEntity):
         #force a match refresh to set state to unknown
         await self.coordinator.async_refresh()
 
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Return the device info."""
+        return DeviceInfo(
+            identifiers={
+                # Serial numbers are unique identifiers within a specific domain
+                (DOMAIN, self.board_coordinator.id)
+            },
+            name = f"Autodarts {self.board_coordinator.item.name}" if self.coordinator.item else None,
+            manufacturer = "Autodarts.io",
+            model = "Board Manager",
+            sw_version = self.board_coordinator.item.version if self.coordinator.item else None,
+        )
 
 class CloudBoardBinarySensor(AutoDartEntity, SwitchEntity):
+    
     __name__ = 'board'
     
     @property
