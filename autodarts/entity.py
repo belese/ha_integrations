@@ -1,4 +1,4 @@
-"""Entity for Surepetcare."""
+"""Entity for autodarts."""
 from __future__ import annotations
 
 
@@ -8,9 +8,13 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
 
-from .autodarts_dev import Match
+import logging
+_LOGGER = logging.getLogger(__name__)
 
 class AutoDartEntity(CoordinatorEntity):
+    
+    __name__ = ""
+
     def __init__(self, coordinator, idx=None):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator, context=idx)
@@ -25,9 +29,8 @@ class AutoDartEntity(CoordinatorEntity):
     @property
     def unique_id(self) :
         idx_id = "" if self.idx is None else f'_{self.idx}'
-        f"{self.coordinator.item.id}_{self.__name__}{idx_id}"
+        return f"{self.coordinator.id}_{self.__name__.replace(' ','_')}{idx_id}"
     
-
     @property
     def device_info(self) -> DeviceInfo:
         """Return the device info."""
@@ -36,14 +39,11 @@ class AutoDartEntity(CoordinatorEntity):
                 # Serial numbers are unique identifiers within a specific domain
                 (DOMAIN, self.coordinator.id)
             },
-            name = f"Autodarts {self.coordinator.item.name}",
+            name = f"Autodarts {self.coordinator.item.name}" if self.coordinator.item else None,
             manufacturer = "Autodarts.io",
             model = "Board Manager",
             sw_version = self.coordinator.item.version if self.coordinator.item else None,
-            #via_device=(hue.DOMAIN, self.api.bridgeid),
         )
-    
-    
     
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -55,7 +55,6 @@ class AutoDartEntity(CoordinatorEntity):
 class AutoDartChildEntity(AutoDartEntity):
     """An entity using CoordinatorEntity.
     """
-    __name__ = ""
 
     def __init__(self, coordinator, idx=None):
         """Pass coordinator to CoordinatorEntity."""
@@ -70,7 +69,7 @@ class AutoDartChildEntity(AutoDartEntity):
     @property
     def unique_id(self) :
         idx_id = "" if self.idx is None else f'_{self.idx}'
-        return f"{self.board_coordinator.item.id}_{self.__name__}{idx_id}"
+        return f"{self.board_coordinator.id}_{self.__name__.replace(' ','_')}{idx_id}"
     
     @property
     def device_info(self) -> DeviceInfo:
@@ -80,7 +79,7 @@ class AutoDartChildEntity(AutoDartEntity):
                 # Serial numbers are unique identifiers within a specific domain
                 (DOMAIN, f"match_{self.board_coordinator.id}")
             },
-            name= f"Autodarts match {self.coordinator.item.name}",
+            name= f"Autodarts match {self.board_coordinator.item.name}",
             manufacturer="Autodarts.io",
             model="Board Match",
             via_device=(DOMAIN, self.board_coordinator.id),
