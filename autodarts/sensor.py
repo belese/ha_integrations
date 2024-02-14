@@ -42,7 +42,8 @@ async def async_setup_entry(
     async_add_entities(
         [
             match_sensor,
-            turn_sensor
+            turn_sensor,
+            board_state_sensor
         ] + player_sensors
     )
 
@@ -52,6 +53,7 @@ async def async_remove_entry(hass, entry) -> None:
 
 
 class BoardStateSensor(AutoDartEntity,SensorEntity) :
+    
     __name__ = "board state"
 
     @property
