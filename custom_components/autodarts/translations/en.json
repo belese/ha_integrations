@@ -6,7 +6,7 @@
                 "data": {
                     "email": "Autodarts User or E-Mail",
                     "password": "Password"
-                },
+                }
 	    },
             "board" : {
 		"title": "Please select you board",
