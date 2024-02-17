@@ -6,7 +6,9 @@
     ],
     "version": "1.0.1",
     "config_flow": true,
-    "dependencies": [],
+    "dependencies": [
+        "http"
+    ],
     "documentation": "https://github.com/belese/ha_integrations",
     "homekit": {},
     "iot_class": "cloud_push",
