@@ -32,6 +32,10 @@ class AutoDartEntity(CoordinatorEntity):
         return f"{self.coordinator.id}_{self.__name__.replace(' ','_')}{idx_id}"
     
     @property
+    def translation_key(self) :
+        return self.__name__.replace(' ','_') 
+    
+    @property
     def device_info(self) -> DeviceInfo:
         """Return the device info."""
         return DeviceInfo(

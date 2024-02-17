@@ -19,5 +19,43 @@
         "abort": {
             "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
         }
+    },
+    "entity": {
+        "sensor": {
+            "board_state": {
+                "state": {
+                    "stopped": "Stopped",
+                    "stopping": "Stopping",
+                    "starting": "Starting",
+                    "started": "Running",
+                    "offline": "Offline",
+                    "throw": "Throw",
+                    "takeout": "Take out",
+                    "takeout in progress" : "Take out in progress"
+                }
+            },
+            "player": {
+                "state_attributes": {
+                    "play": {
+                        "state": {
+                            "true": "Playing",
+                            "false": "Not playing"
+                        }
+                    },
+                    "current": {
+                        "state": {
+                            "true": "Current player",
+                            "false": "Not current player"
+                        }
+                    },
+                    "winner": {
+                        "state": {
+                            "true": "Winner",
+                            "false": "Looser"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

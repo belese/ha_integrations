@@ -55,12 +55,12 @@ async def async_remove_entry(hass, entry) -> None:
 class BoardStateSensor(AutoDartEntity,SensorEntity) :
     
     __name__ = "board state"
-
+    
     @property
     def native_value(self) -> str | None:
         """Return the state of the match."""
         if self.coordinator.data :
-            return self.coordinator.data.state['status']
+            return self.coordinator.data.state['status'].lower()
 
     @property
     def extra_state_attributes(self) -> dict | None:
