@@ -2,17 +2,17 @@
     "config": {
         "step": {
             "user": {
-		"title": "Please enter your Autodarts Login",	
+		        "title": "Please enter your Autodarts Login",
                 "data": {
                     "email": "Autodarts User or E-Mail",
                     "password": "Password"
                 }
 	    },
             "board" : {
-		"title": "Please select you board",
-		"data" : {
-                     "board_id" : "Board"
-		}
+                "title": "Please select you board",
+                "data" : {
+                    "board_id" : "Board"
+                }
             }
         },
         "error": {
@@ -22,6 +22,49 @@
         },
         "abort": {
             "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+        }
+    },
+    "entity": {
+        "sensor": {
+            "board_state": {
+                "name": "Board state",
+                "state": {
+                    "stopped": "Stopped",
+                    "stopping": "Stopping",
+                    "starting": "Starting",
+                    "started": "Running",
+                    "offline": "Offline",
+                    "throw": "Throw",
+                    "takeout": "Take out",
+                    "takeout_in_progress" : "Partial take out"
+                }
+            },
+            "player": {
+                "name": "Player",
+                "state_attributes": {
+                    "play": {
+                        "name": "Is playing",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    },
+                    "current": {
+                        "name": "Current player",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    },
+                    "winner": {
+                        "name": "Winner",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    }
+                }
+            }
         }
     }
 }

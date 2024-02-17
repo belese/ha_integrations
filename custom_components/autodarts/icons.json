@@ -38,7 +38,7 @@
           "offline": "mdi:lan-disconnect",
           "throw": "darts:dart",
           "takeout": "mdi:bullseye-arrow",
-          "takeout in progress" : "mdi:bullseye"
+          "takeout_in_progress" : "mdi:bullseye"
         }
       },
       "match": {
@@ -46,7 +46,6 @@
       },
       "player": {
         "default": "mdi:account-off",
-        "state": {},
         "state_attributes": {
           "play": {
             "state": {
