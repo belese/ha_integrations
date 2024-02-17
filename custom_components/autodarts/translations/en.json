@@ -7,10 +7,13 @@
                     "email": "Autodarts User or E-Mail",
                     "password": "Password"
                 },
+	    },
             "board" : {
-                "board_id" : "Board Id"
+		"title": "Please select you board",
+		"data" : {
+                     "board_id" : "Board"
+		}
             }
-        }
         },
         "error": {
             "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
