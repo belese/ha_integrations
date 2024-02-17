@@ -2,9 +2,9 @@
 
 DOMAIN = "autodarts"
 
-AUTODART_CLIENT_ID = "wusaaa-caller-for-autodarts"
-AUTODART_REALM_NAME = "autodarts"
-AUTODART_CLIENT_SECRET = "4hg5d4fddW7rqgoY8gZ42aMpi2vjLkzf"
+AUTODART_CLIENT_ID = "my-id"
+AUTODART_REALM_NAME = "my-name"
+AUTODART_CLIENT_SECRET = "my-secret"
 
 AUTODART_MATCH_URL = "https://play.autodarts.io/matches"
 
