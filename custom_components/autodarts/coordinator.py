@@ -38,17 +38,14 @@ class AutoDartsBaseCoordinator(DataUpdateCoordinator):
     
     @property
     def connected(self) :
-        _LOGGER.warning(f'Get coordinator connected item : {self.item} connected {True if self.item and self.item.is_connected else False}')
         return True if self.item and self.item.is_connected else False
     
     def connect(self) :
-        _LOGGER.warning(f'We are connecting {self.item} {self.connected}')
         if self.item and not self.connected :
             self._unregister_cb.append( self.item.register_callback(self.on_state_updated) )
             self._unregister_cb.append( self.item.register_async_callback(self.on_unexpected_close,event="error",topic="events") )
             self._unregister_cb.append( self.item.register_async_callback(self.on_unexpected_close,event="disconnected",topic="events") )
             self.item.connect()
-            _LOGGER.warning(f'We are normally connected {self.item} {self.connected}')
 
     def disconnect(self) :
         if self.item and self.connected :

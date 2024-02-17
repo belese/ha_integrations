@@ -120,7 +120,6 @@ class PlayerSensor(AutoDartChildEntity,SensorEntity) :
     @property
     def native_value(self) -> str | None:
         """Return the state of the match."""
-        _LOGGER.warning(f'native_value {self.coordinator.data} {self.coordinator.data} ')
         if player:=self.player :
             return player.name
 
@@ -159,7 +158,6 @@ class TurnSensor(AutoDartChildEntity,SensorEntity):
     @property
     def native_value(self) -> str | None:
         """Return the state of the match."""
-        _LOGGER.warning(f'native_value {self.coordinator.data} {self.coordinator.data} ')
         if not self.coordinator.data :
             return None
         else:
