@@ -1,0 +1,73 @@
+{
+  "entity": {
+    "select": {
+        "dart": {
+          "default": "darts:dart"
+        }
+    },
+    "button" : {
+      "next" : {
+        "default" : "mdi:arrow-right-bold-circle-outline"
+      },
+      "finish" : {
+        "default" : "mdi:stop-circle-outline"
+      },
+      "reset" : {
+        "default" : "mdi:restart"
+      },
+      "undo" : {
+        "default" : "mdi:undo"
+      }
+    },
+    "switch" : {
+      "cloud_connection" : {
+        "default": "darts:autodarts"
+      },
+      "board" : {
+        "default": "mdi:bullseye"
+      }
+    },
+    "sensor": {
+      "board_state": {
+        "default": "mdi:crosshairs-question",
+        "state": {
+          "stopped": "mdi:stop",
+          "stopping": "mdi:stop-circle-outline",
+          "starting": "mdi:play-circle-outline",
+          "started": "mdi:play",
+          "offline": "mdi:lan-disconnect",
+          "throw": "darts:dart",
+          "takeout": "mdi:bullseye-arrow",
+          "takeout_in_progress" : "mdi:bullseye"
+        }
+      },
+      "match": {
+        "default": "mdi:scoreboard-outline"
+      },
+      "player": {
+        "default": "mdi:account-off",
+        "state_attributes": {
+          "play": {
+            "state": {
+              "true": "mdi:account",
+              "false": "mdi:account-off"
+            }
+          },
+          "current": {
+            "state": {
+                "true": "mdi:account-circle"
+            }
+          },
+          "winner": {
+              "state": {
+                  "true": "mdi:shield-account"
+              }
+          }
+        }
+      },
+      "turn" : {
+        "default" : "mdi:bullseye"
+      }
+    }
+  }
+}

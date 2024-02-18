@@ -6,21 +6,19 @@ from typing import Any
 
 import voluptuous as vol
 
+from autodarts import AutoDartSession, CloudBoard
 from homeassistant import config_entries
-from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 
-_LOGGER = logging.getLogger(__name__)
-
-from autodarts import AutoDartSession , CloudBoard
-
 from .const import (
-    DOMAIN,
     AUTODART_CLIENT_ID,
-    AUTODART_REALM_NAME,
     AUTODART_CLIENT_SECRET,
+    AUTODART_REALM_NAME,
+    DOMAIN,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
@@ -29,7 +27,8 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
     }
 )
 
-async def async_validate_input(email:str, password:str) -> dict[str, Any]:
+
+async def async_validate_input(email: str, password: str) -> dict[str, Any]:
     """Validate the user input allows us to connect.
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
@@ -46,7 +45,7 @@ async def async_validate_input(email:str, password:str) -> dict[str, Any]:
 
     if not await session.is_authenticated():
         raise InvalidAuth
-        
+
     # Return info that you want to store in the config entry.
     return session
 
@@ -65,13 +64,15 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if user_input is not None:
             try:
-                self.session = await async_validate_input(user_input["email"], user_input["password"])
+                self.session = await async_validate_input(
+                    user_input["email"], user_input["password"]
+                )
                 self.data = user_input
             except CannotConnect:
                 errors["base"] = "cannot_connect"
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
-            #except Exception:  # pylint: disable=broad-except
+            # except Exception:  # pylint: disable=broad-except
             #    _LOGGER.exception("Unexpected exception")
             #    errors["base"] = "unknown"
             else:
@@ -79,9 +80,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
         )
-    
+
     async def async_step_board(
-        self, user_input: dict[str, Any] | None = None,
+        self,
+        user_input: dict[str, Any] | None = None,
     ) -> FlowResult:
         errors: dict[str, str] = {}
         if user_input is not None:
@@ -93,20 +95,25 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 _LOGGER.exception("Unexpected exception")
                 errors["base"] = "unknown"
             else:
-                return self.async_create_entry(title=self.boards[user_input['board_id']], data=self.data)
-        
-        #self.boards = {}
-        #async for cloud_board in CloudBoard.factory(self.session) :
-        #    self.boards[cloud_board.id] = f"{cloud_board.name} ({cloud_board.id})"     
-        #_LOGGER.error(f"Unexpected exception  {self.boards}")
-        self.boards = {cloud_board.id: f"{cloud_board.name} ({cloud_board.id})" async for cloud_board in CloudBoard.factory(self.session)}
+                return self.async_create_entry(
+                    title=self.boards[user_input["board_id"]], data=self.data
+                )
+
+        # self.boards = {}
+        # async for cloud_board in CloudBoard.factory(self.session) :
+        #    self.boards[cloud_board.id] = f"{cloud_board.name} ({cloud_board.id})"
+        # _LOGGER.error(f"Unexpected exception  {self.boards}")
+        self.boards = {
+            cloud_board.id: f"{cloud_board.name} ({cloud_board.id})"
+            async for cloud_board in CloudBoard.factory(self.session)
+        }
 
         step_board_data_schema = vol.Schema(
             {
-                vol.Required("board_id"): vol.In( self.boards ),
+                vol.Required("board_id"): vol.In(self.boards),
             }
         )
-        
+
         return self.async_show_form(
             step_id="board", data_schema=step_board_data_schema, errors=errors
         )

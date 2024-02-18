@@ -26,14 +26,19 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
     match_coordinator = hass.data[DOMAIN][entry.entry_id]['match_coordinator']
+    board_coordinator = hass.data[DOMAIN][entry.entry_id]['board_coordinator']
+    
     next_button = NextButton(match_coordinator)
     undo_button = UndoButton(match_coordinator)
     finish_button = FinishButton(match_coordinator)
+    reset_button = ResetButton(board_coordinator)
+    
     async_add_entities(
         [
             next_button,
             undo_button,
-            finish_button
+            finish_button,
+            reset_button
         ]
     )
 
@@ -41,6 +46,16 @@ async def async_remove_entry(hass, entry) -> None:
     """Handle removal of an entry."""
     pass
 
+
+class ResetButton(AutoDartEntity,ButtonEntity):
+    """Button for next Autodart. Depending on the state, it could be next player or next leg"""
+    
+    __name__ = "reset"
+
+    async def async_press(self):
+        if self.coordinator.data :
+            await self.coordinator.data.async_reset()
+                
 class NextButton(AutoDartChildEntity,ButtonEntity):
     """Button for next Autodart. Depending on the state, it could be next player or next leg"""
     

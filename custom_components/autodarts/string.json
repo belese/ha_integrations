@@ -7,7 +7,7 @@
                     "password": "[%key:common::config_flow::data::password%]"
                 },
             "board" : {
-                "board_id" : "Board Id"
+                "board_id" : "Board"
             }
         }
         },
@@ -18,6 +18,49 @@
         },
         "abort": {
             "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+        }
+    },
+    "entity": {
+        "sensor": {
+            "board_state": {
+                "name": "Board state",
+                "state": {
+                    "stopped": "Stopped",
+                    "stopping": "Stopping",
+                    "starting": "Starting",
+                    "started": "Running",
+                    "offline": "Offline",
+                    "throw": "Throw",
+                    "takeout": "Take out",
+                    "takeout_in_progress" : "Partial take out"
+                }
+            },
+            "player": {
+                "name": "Player",
+                "state_attributes": {
+                    "play": {
+                        "name": "Is playing",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    },
+                    "current": {
+                        "name": "Current player",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    },
+                    "winner": {
+                        "name": "Winner",
+                        "state": {
+                            "true": "Yes",
+                            "false": "No"
+                        }
+                    }
+                }
+            }
         }
     }
 }
