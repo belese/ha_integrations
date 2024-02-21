@@ -4,7 +4,7 @@
     "codeowners": [
         "@belese"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "config_flow": true,
     "dependencies": [
         "http"
@@ -14,7 +14,7 @@
     "homekit": {},
     "iot_class": "cloud_push",
     "requirements": [
-        "git+https://github.com/belese/python-autodarts#autodarts==0.0.7",
+        "git+https://github.com/belese/python-autodarts#autodarts==0.0.8",
         "aiohttp",
         "python-keycloak",
         "asyncio-atexit",
