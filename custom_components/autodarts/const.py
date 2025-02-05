@@ -2,8 +2,8 @@
 
 DOMAIN = "autodarts"
 
-AUTODART_CLIENT_ID = 'misy-homeassistant-plugin-for-autodarts'
-AUTODART_CLIENT_SECRET = "8vqqSJjAj2yYlJlifnsOW8oej6v2lNJO"
+AUTODART_CLIENT_ID = ''
+AUTODART_CLIENT_SECRET = ""
 AUTODART_REALM_NAME = 'autodarts'
 
 AUTODART_MATCH_URL = "https://api.autodarts.io/gs/v0/matches/"
