@@ -84,7 +84,7 @@ class CloudBoardBinarySensor(AutoDartEntity, SwitchEntity):
     def is_on(self) -> bool:
         """Return True if entity is available."""
         if self.coordinator.data:
-            return self.coordinator.data.state["running"]
+            return self.coordinator.data.state["connected"]
 
     async def async_turn_on(self, **kwargs):
         """Turn the entity on."""
